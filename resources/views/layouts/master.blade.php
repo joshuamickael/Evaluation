@@ -202,6 +202,9 @@
             <message message="{{ Session::get('flash_message') }}" type="success"></message>
         @endif
     </div>
+    
+    
+
 
     <!-- /#page-content-wrapper -->
 </div>
@@ -217,7 +220,8 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery-ui-sortable.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/bootstrap-tour-standalone.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/picker.js') }}"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @if(App::getLocale() == "dk")
 <script>
     $(document).ready(function () {
