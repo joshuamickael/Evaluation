@@ -9,9 +9,13 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+
 Route::auth();
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::group(['middleware' => ['auth']], function () {
+
 
     /**
      * Main
@@ -132,7 +136,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/first-steps', 'SettingsController@updateFirstStep')->name('settings.update.first_step');
         Route::get('/business-hours', 'SettingsController@businessHours')->name('settings.business_hours');
         Route::get('/date-formats', 'SettingsController@dateFormats')->name('settings.date_formats');
+        Route::get('/reset', 'SettingsController@reset')->name('settings.reset_data');
     });
+
 
     /**
      * Departments
@@ -188,7 +194,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/add-payment/{invoice}', 'PaymentsController@addPayment')->name('payment.add');
     });
 
-    /** 
+    /**
      * Offers
      */
     Route::group(['prefix' => 'offer'], function () {

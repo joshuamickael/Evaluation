@@ -170,11 +170,26 @@
                     <a href="{{ route('integrations.index')}}"
                        class="list-group-item childlist"> <i
                                 class="bullet-point"><span></span></i> {{ __('Integrations') }}</a>
+
+                                
+                    <a href="{{ route('settings.reset_data') }}"
+                       onclick="return confirm('Are you sure you want to reset the database? This action is irreversible!');"
+                       class="list-group-item childlist">
+                        <i class="bullet-point"><span></span></i> {{ __('Reset Base') }}
+                    </a>
                 </div>
             @endif
         </div>
     </nav>
 
+
+    @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger" >{{ session('error') }}</div>
+        @endif
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -204,7 +219,8 @@
     </div>
     
     
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- /#page-content-wrapper -->
 </div>
@@ -220,8 +236,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery-ui-sortable.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/bootstrap-tour-standalone.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/picker.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 @if(App::getLocale() == "dk")
 <script>
     $(document).ready(function () {

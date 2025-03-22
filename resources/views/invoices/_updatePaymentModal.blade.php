@@ -42,10 +42,28 @@
     <button type="button" class="btn btn-default col-lg-6"
             data-dismiss="modal">{{ __('Close') }}</button>
     <div class="col-lg-6">
-        <input type="submit" value="{{__('Register payment')}}" class="btn btn-brand form-control closebtn">
+        <input type="submit" id="register-payment-btn" value="{{__('Register payment')}}" class="btn btn-brand form-control closebtn">
     </div>
 
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const amountInput = document.getElementById("amount");
+        const amountDue = parseFloat("{{$amountDue->getBigDecimalAmount()}}");
+
+        form.addEventListener("submit", function (event) {
+            let enteredAmount = parseFloat(amountInput.value);
+
+            if (enteredAmount > amountDue) {
+                event.preventDefault();
+                alert("Erreur : le montant saisi dépasse le montant dû !");
+            }
+        });
+    });
+</script>
+
+
 </form>
 
 @push('scripts')

@@ -11,6 +11,7 @@ use App\Services\ClientNumber\ClientNumberService;
 use App\Services\ClientNumber\ClientNumberValidator;
 use App\Services\InvoiceNumber\InvoiceNumberService;
 use App\Services\InvoiceNumber\InvoiceNumberValidator;
+use App\Services\reset\DatabaseResetService;
 use Auth;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -24,13 +25,21 @@ use App\Http\Requests\Setting\UpdateSettingOverallRequest;
 
 class SettingsController extends Controller
 {
+    protected $databaseResetService;
     /**
      * SettingsController constructor.
      */
-    public function __construct()
+    public function __construct(DatabaseResetService $databaseResetService)
     {
         $this->middleware('user.is.admin', ['only' => ['index']]);
         $this->middleware('is.demo', ['except' => ['index']]);
+        $this->databaseResetService = $databaseResetService;
+    }
+  
+    public function reset()
+    {
+        $result = $this->databaseResetService->resetDatabase();
+        return redirect()->back()->with($result['status'], $result['message']);
     }
 
     /**
